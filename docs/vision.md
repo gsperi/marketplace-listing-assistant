@@ -1,116 +1,147 @@
-# Marketplace Listing Assistant
+# Vision
 
-## Vision
+## Project Status
 
-Marketplace Listing Assistant è una piattaforma progettata per assistere i venditori nella creazione di annunci ottimizzati per marketplace online come Vinted, eBay e piattaforme future.
+**Current Phase:** Project Definition
 
-L'obiettivo non è sostituire il venditore, ma ridurre drasticamente il tempo necessario per creare annunci di qualità, migliorandone la visibilità e aumentando la probabilità di vendita.
-
-Il sistema utilizza tecniche di analisi, arricchimento dati e Intelligenza Artificiale per trasformare poche informazioni iniziali (foto o dati inseriti dall'utente) in annunci completi, coerenti e ottimizzati.
+**Project Maturity:** Pre-MVP
 
 ---
 
-# Il problema
+# Vision
 
-Oggi la pubblicazione di un annuncio richiede numerose attività ripetitive:
+Marketplace Listing Assistant is a software platform designed to help sellers create high-quality marketplace listings for platforms such as Vinted, eBay, and future marketplaces.
 
-- scrivere un titolo efficace;
-- compilare una descrizione;
-- scegliere le parole chiave corrette;
-- determinare un prezzo competitivo;
-- adattare il contenuto ai diversi marketplace.
+The project does not aim to replace the seller, but to reduce the time required to create effective listings while improving their quality, consistency, and visibility.
 
-Molti utenti non conoscono il funzionamento degli algoritmi di ricerca dei marketplace e realizzano annunci poco efficaci.
+Starting from a limited amount of information, such as product images or manually entered data, the system assists users by generating optimized listing content and providing intelligent suggestions throughout the listing creation process.
 
-Il risultato è una minore visibilità e tempi di vendita più lunghi.
+The long-term vision is to become an intelligent assistant that simplifies listing creation while remaining independent from any specific marketplace.
 
 ---
 
-# La soluzione
+# Problem Statement
 
-Marketplace Listing Assistant automatizza gran parte del processo.
+Creating a marketplace listing is often a repetitive and time-consuming activity.
 
-Partendo da fotografie o informazioni di base, il sistema:
+Sellers are typically required to:
 
-- riconosce il prodotto;
-- arricchisce le informazioni disponibili;
-- suggerisce prezzi coerenti con il mercato;
-- genera titoli e descrizioni ottimizzati;
-- valuta la qualità dell'annuncio tramite uno score;
-- produce un contenuto facilmente esportabile verso differenti marketplace.
+* write an effective title;
+* create a clear and informative description;
+* choose relevant keywords;
+* estimate a competitive selling price;
+* adapt the listing to different marketplace requirements.
 
----
+Even experienced sellers spend a significant amount of time performing repetitive tasks that add little value.
 
-# Obiettivi
-
-Il progetto vuole:
-
-- diminuire il tempo necessario per creare un annuncio;
-- migliorare la qualità media degli annunci;
-- aiutare anche utenti poco esperti;
-- rendere il processo ripetibile e misurabile;
-- essere estendibile a nuovi marketplace e nuove categorie merceologiche.
+As a result, listing quality becomes inconsistent and valuable time is lost.
 
 ---
 
-# Cosa NON è
+# Proposed Solution
 
-Il progetto non nasce come:
+Marketplace Listing Assistant supports users throughout the listing creation workflow.
 
-- gestionale di magazzino;
-- software ERP;
-- piattaforma di e-commerce;
-- sistema di repricing automatico;
-- sistema di pubblicazione massiva;
-- sostituto dei marketplace.
+Starting from product images or manually entered information, the system should be able to:
 
-L'obiettivo è produrre annunci migliori, non gestire l'intero processo di vendita.
+* identify or classify the product;
+* enrich the available information;
+* suggest a competitive price range;
+* generate optimized titles and descriptions;
+* recommend relevant keywords;
+* evaluate listing quality through a scoring system;
+* export marketplace-ready listing content.
 
----
+The user always remains in control of the final result.
 
-# MVP
-
-La prima versione dovrà essere in grado di:
-
-- acquisire immagini;
-- permettere l'inserimento manuale dei dati essenziali;
-- generare titolo e descrizione;
-- suggerire keyword;
-- fornire uno score qualitativo;
-- esportare il risultato.
+The software provides intelligent assistance, not automatic decisions.
 
 ---
 
-# Evoluzione futura
+# Objectives
 
-Successivamente potranno essere introdotti:
+The project aims to:
 
-- integrazione tramite API con marketplace;
-- riconoscimento automatico tramite AI;
-- analisi storica dei prezzi;
-- supporto multiutente;
-- statistiche sulle performance degli annunci;
-- automazioni di pubblicazione.
+* reduce listing creation time;
+* improve overall listing quality;
+* assist experienced marketplace users by automating repetitive work;
+* provide measurable improvements to the listing creation process;
+* remain extensible to additional marketplaces and product categories.
 
 ---
 
-# Principi progettuali
+# Scope
 
-Il progetto seguirà alcuni principi fondamentali:
+The primary purpose of the project is listing optimization.
 
-- modularità;
-- semplicità;
-- estendibilità;
-- indipendenza dai marketplace;
-- componenti sostituibili;
-- AI come supporto alle decisioni dell'utente e non come sostituto del controllo umano.
+Marketplace Listing Assistant focuses on helping users create better listings rather than managing the complete selling process.
+
+---
+
+# Out of Scope
+
+The project is not intended to become:
+
+* an ERP system;
+* an inventory management platform;
+* a complete e-commerce solution;
+* an automatic repricing engine;
+* a marketplace replacement;
+* a fully automated publishing platform.
+
+These capabilities may be evaluated in future versions only if they support the project's core vision.
+
+---
+
+# Minimum Viable Product (MVP)
+
+The first version should be capable of:
+
+* uploading product images;
+* accepting manual product information;
+* generating optimized titles;
+* generating listing descriptions;
+* suggesting relevant keywords;
+* evaluating listing quality through a scoring system;
+* exporting marketplace-ready content.
+
+---
+
+# Future Evolution
+
+Future versions may introduce:
+
+* marketplace API integrations;
+* AI-based product recognition;
+* OCR capabilities;
+* historical price analysis;
+* multi-user support;
+* listing performance analytics;
+* publication automation where technically appropriate.
+
+These features are intentionally excluded from the initial MVP.
+
+---
 
 # Success Metrics
 
-Un annuncio creato con il software dovrebbe ottenere almeno uno dei seguenti risultati:
+The project will be considered successful if it can demonstrate one or more of the following outcomes:
 
-- riduzione del tempo di creazione superiore al 50%;
-- aumento della completezza delle informazioni;
-- miglioramento dello score qualitativo;
-- incremento della visibilità rispetto ad un annuncio scritto manualmente;
-- aumento del tasso di conversione (da validare con dati reali).
+* reduce listing creation time by at least 50%;
+* improve listing completeness;
+* generate titles consistently judged better than manually written ones;
+* increase listing visibility (to be validated);
+* improve conversion rates (to be validated).
+
+These metrics represent project goals and will require validation using real users and real marketplace data.
+
+---
+
+# Guiding Principle
+
+The project focuses on solving real user problems before introducing technical complexity.
+
+Every new feature should contribute to improving the quality or efficiency of marketplace listing creation.
+
+Technology is a means to achieve this goal, never the goal itself.
+
