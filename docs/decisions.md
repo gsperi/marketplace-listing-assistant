@@ -190,6 +190,53 @@ When possible, validate assumptions with practical tests.
 
 The first goal is to prove that the system can generate better marketplace listings, not to build a complete marketplace management platform.
 
+### User-Centric Design
+
+The project is primarily designed for experienced marketplace users.
+
+The initial goal is not to teach users how to create listings, but to reduce the amount of repetitive work while preserving the quality of their listings.
+
+The software should automate repetitive tasks without removing control from the user.
+
+Future simplified workflows for less experienced users may be introduced only after the core experience has been validated.
+
+---
+
+### Core Engine First
+
+The business logic should remain independent from the user interface.
+
+The Core Engine should always produce the highest level of information available, including:
+
+* listing title;
+* description;
+* keywords;
+* quality score;
+* suggested price range;
+* warnings;
+* alternative suggestions;
+* confidence indicators.
+
+Different user interfaces may expose different subsets of this information depending on the target user.
+
+The amount of information shown is a responsibility of the UI, not of the Core Engine.
+
+---
+
+### Feature Growth
+
+New ideas should not interrupt the current milestone.
+
+When a useful feature is identified but does not contribute to the current objective, it should be added to the project roadmap under a future milestone.
+
+The project follows the principle:
+
+> Capture ideas immediately.
+> Implement them only when their priority arrives.
+
+This approach helps preventing feature creep while preserving valuable ideas for future iterations.
+
+
 ---
 
 ## Architecture Decisions
