@@ -318,3 +318,22 @@ The core value of the product must first be validated through listing generation
 
 Status: accepted.
 
+### Product Input Strategy
+The Core Engine should work from a normalized Product Context.
+
+```text
+The initial UI will create this context from images only.
+Future input sources may create the same context from text, URLs, barcodes, or external data.
+```
+
+### Product Context
+
+...
+
+### AI Collaboration Model
+
+...
+
+### Recognition Failure Strategy
+
+...

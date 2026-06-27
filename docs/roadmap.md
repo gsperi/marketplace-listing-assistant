@@ -1,72 +1,110 @@
+# Roadmap
+
 ## Current Phase
 
-Project Definition
+### Software Architecture
 
-Current objective:
+**Status:** In Progress
 
-Define the product vision, development process and software architecture before writing production code.
+### Current Objective
+
+Define the high-level software architecture before implementing the first production components.
+
+Current focus:
+
+* define the first user workflow;
+* identify the core system responsibilities;
+* define the Product Context model;
+* define the first vertical slice;
+* identify the initial system boundaries.
+
+---
 
 ## Next Milestones
 
-### M1 - Product Definition
+### Development Environment
 
-- Finalize documentation
-- Identify the first target user
-- Define the MVP scope
+**Priority:** High
 
-Status: In Progress
+Goal:
 
----
+Prepare a reproducible development environment.
 
-### M2 - Software Architecture
+Expected deliverables:
 
-- High-level architecture
-- Initial data model
-- Module decomposition
-- API boundaries
-
-Status: Planned
+* backend bootstrap;
+* frontend bootstrap;
+* Docker environment;
+* PostgreSQL setup;
+* first runnable application.
 
 ---
 
-### M3 - Project Bootstrap
+### First Vertical Slice
 
-- Backend bootstrap
-- Frontend bootstrap
-- Docker environment
-- Database initialization
+**Priority:** High
 
-Status: Planned
+Goal:
+
+Validate the complete workflow with the smallest useful implementation.
+
+Expected deliverables:
+
+* image upload;
+* mocked product recognition;
+* Product Context generation;
+* manual review;
+* basic listing generation;
+* listing score;
+* export.
 
 ---
 
-### M4 - First Vertical Slice
+### Product Intelligence
 
-- Upload images
-- Create listing draft
-- Generate first listing
-- Export generated content
+**Priority:** Medium
 
-Status: Planned
+Goal:
+
+Replace mocked services with real implementations.
+
+Possible deliverables:
+
+* AI-based recognition;
+* pricing engine;
+* keyword generation;
+* improved listing quality.
+
+---
 
 ## Future Ideas
 
-- Quick Mode
-- Batch Listing Creation
-- Browser Extension
-- Mobile App
-- Marketplace API Integration
-- Local AI Models
-- OCR Improvements
-- Analytics Dashboard
+Ideas intentionally postponed.
+
+Current list:
+
+* Quick Mode
+* Batch Listing Creation
+* Text-based product input
+* Barcode input
+* URL-based product import
+* Marketplace API integration
+* Browser extension
+* Mobile application
+* Learning layer based on user confirmations
+* Local AI models
+
+---
 
 ## Parking Lot
 
-Ideas intentionally postponed until there is enough information to evaluate them.
+Ideas that may become relevant in future iterations but are intentionally excluded from the current roadmap.
 
 Examples:
 
-- Marketplace ranking analysis
-- Automatic pricing strategies
-- AI fine tuning
-- Browser automation
+* marketplace ranking analysis;
+* automatic repricing;
+* advanced analytics;
+* recommendation engine;
+* inventory management.
+
