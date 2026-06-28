@@ -205,6 +205,55 @@ Direct marketplace publishing is outside the MVP scope.
 
 ---
 
+## Initial Domain Object Graph
+
+The current MVP workflow starts from a single uploaded media asset.
+
+For the MVP, the relationship between `AnalysisSession` and `MediaAsset` is intentionally restricted to one media asset per session.
+
+```text
+AnalysisSession
+│
+├── MediaAsset (1)
+│
+├── RecognitionReport (0..1)
+│
+└── ProductContext (0..1)
+        │
+        ├── PriceSuggestion (0..1)
+        │
+        └── ListingDraft (0..N)
+```
+
+### Notes
+
+* `AnalysisSession` represents the user-started analysis workflow.
+* `MediaAsset` represents the uploaded file used as input.
+* `RecognitionReport` represents the system-generated recognition output.
+* `ProductContext` represents the user-reviewed and normalized product information.
+* `PriceSuggestion` is generated from a `ProductContext`.
+* `ListingDraft` is generated from a `ProductContext`.
+
+### MVP Constraint
+
+```text
+1 AnalysisSession = 1 MediaAsset = 1 product candidate
+```
+
+Multiple media assets per session are intentionally excluded from the MVP.
+
+Supporting multiple assets would require the system to determine whether the uploaded files represent:
+
+* the same product;
+* different products;
+* front and back images;
+* additional details;
+* accidental uploads.
+
+Future support for multiple media assets may require an explicit concept such as `MediaGroup` or `ProductEvidence`.
+
+
+
 ## Main Architectural Concepts
 
 ### Product Context

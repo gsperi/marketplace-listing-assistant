@@ -93,7 +93,9 @@ Current list:
 * Mobile application
 * Learning layer based on user confirmations
 * Local AI models
-
+* User search history
+* Media library
+* Saved product analyses
 ---
 
 ## Parking Lot

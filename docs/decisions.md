@@ -337,3 +337,23 @@ Future input sources may create the same context from text, URLs, barcodes, or e
 ### Recognition Failure Strategy
 
 ...
+
+### Media Asset Cardinality
+
+For the MVP, an AnalysisSession supports exactly one MediaAsset.
+
+Although the model may evolve to support multiple media assets in the future, the first implementation intentionally avoids this complexity.
+
+Multiple media assets introduce ambiguity:
+
+- they may represent the same product;
+- they may represent different products;
+- they may be front/back images;
+- they may produce conflicting recognition results.
+
+The initial workflow follows the rule:
+
+```text
+1 AnalysisSession = 1 MediaAsset = 1 product candidate
+Future support for multiple media assets will require an explicit concept such as MediaGroup or ProductEvidence.
+```
