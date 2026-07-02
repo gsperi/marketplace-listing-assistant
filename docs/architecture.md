@@ -88,6 +88,22 @@ The system should provide:
 
 The analysis is not considered authoritative until reviewed by the user.
 
+### Attribute Recognition
+
+Not every product attribute can be reliably extracted from an image.
+
+Some attributes may require user confirmation or manual input, even when the product itself has been correctly identified.
+
+For example, trading card games often distinguish between:
+
+- printed rarity (editorial classification);
+- finish (physical surface treatment).
+
+These concepts are independent in several games, such as Pokémon, and may require different recognition strategies.
+
+The MVP intentionally allows users to manually confirm or provide these attributes instead of attempting automatic recognition.
+
+Future versions may introduce computer vision techniques to recognize surface finishes when technically reliable.
 ---
 
 ### 3. Build Normalized Product Context

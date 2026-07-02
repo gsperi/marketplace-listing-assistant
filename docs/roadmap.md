@@ -96,6 +96,9 @@ Current list:
 * User search history
 * Media library
 * Saved product analyses
+* Automatic finish recognition using computer vision: the system may identify foil patterns and surface finishes (e.g. Reverse Holo, Cosmos Holo, Cracked Ice) from product images.
+
+This feature is intentionally excluded from the MVP.
 ---
 
 ## Parking Lot
