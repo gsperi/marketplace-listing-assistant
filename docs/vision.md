@@ -145,3 +145,10 @@ Every new feature should contribute to improving the quality or efficiency of ma
 
 Technology is a means to achieve this goal, never the goal itself.
 
+### Human-Centered Assistance
+
+The application supports the user throughout the listing workflow by automating objective, repeatable and verifiable tasks.
+
+Subjective decisions remain the responsibility of the user.
+
+The application assists decision-making but never replaces user judgment.

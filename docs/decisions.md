@@ -328,7 +328,17 @@ Future input sources may create the same context from text, URLs, barcodes, or e
 
 ### Product Context
 
-...
+### Ownership of Product Attributes
+
+The system distinguishes between attributes that can be objectively identified and attributes that require user judgment.
+
+Objective attributes may be extracted or suggested by the system and later confirmed by the user.
+
+Subjective attributes remain under the user's responsibility.
+
+Card condition is always a user-owned attribute.
+
+The application may assist the user during the listing workflow, but it must not automatically determine or assign the condition of a collectible card.
 
 ### AI Collaboration Model
 

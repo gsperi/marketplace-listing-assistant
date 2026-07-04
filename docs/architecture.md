@@ -342,6 +342,25 @@ Example:
 
 The exact structure will be refined later.
 
+For the MVP, `ProductContext` should contain the minimum information required to generate a useful listing and support price estimation:
+
+- card name;
+- set name;
+- set code;
+- collector number;
+- language;
+- printed rarity;
+- finish;
+- condition.
+
+`condition` is manually provided or confirmed by the user.
+
+Future versions may add grading-related fields, such as:
+
+- grading company;
+- grade value;
+- certification number.
+
 ---
 
 ### Listing Draft
