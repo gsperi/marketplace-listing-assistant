@@ -72,19 +72,18 @@ Future input sources may include:
 These sources are intentionally excluded from the initial MVP.
 
 ---
-
 ### 2. Analyze Product Image
 
-The system attempts to identify or classify the product using the uploaded image.
+The system attempts to analyze the uploaded product image.
 
-At this stage, the result is only a proposal.
+The analysis phase may consist of multiple internal steps, including:
 
-The system should provide:
+- text extraction;
+- attribute recognition;
+- interpretation according to the expected card structure;
+- draft product context generation.
 
-* detected product information;
-* confidence score;
-* possible alternatives;
-* missing or uncertain fields.
+At this stage, the result is only a system-generated proposal.
 
 The analysis is not considered authoritative until reviewed by the user.
 
@@ -232,23 +231,25 @@ AnalysisSession
 │
 ├── MediaAsset (1)
 │
-├── RecognitionReport (0..1)
+├── TextExtractionResult (0..1)
 │
+├── DraftProductContext (0..1)
 └── ProductContext (0..1)
         │
         ├── PriceSuggestion (0..1)
         │
         └── ListingDraft (0..N)
-```
+
+
 
 ### Notes
-
 * `AnalysisSession` represents the user-started analysis workflow.
 * `MediaAsset` represents the uploaded file used as input.
-* `RecognitionReport` represents the system-generated recognition output.
+* `TextExtractionResult` represents the raw or semi-structured text extracted from the media asset.
+* `DraftProductContext` represents the system-generated structured proposal derived from the extracted text.
 * `ProductContext` represents the user-reviewed and normalized product information.
-* `PriceSuggestion` is generated from a `ProductContext`.
-* `ListingDraft` is generated from a `ProductContext`.
+* `PriceSuggestion` is generated from a ProductContext.
+* `ListingDraft` is generated from a ProductContext.
 
 ### MVP Constraint
 
@@ -272,11 +273,45 @@ Future support for multiple media assets may require an explicit concept such as
 
 ## Main Architectural Concepts
 
+### DraftProductContext
+
+`DraftProductContext` represents the system-generated structured proposal created during the analysis workflow.
+
+It is derived from the extracted text and other available recognition signals.
+
+Its purpose is to help identify the product.
+
+It should contain only the information needed to determine what the product is, not every possible product attribute.
+
+Typical fields may include:
+
+- product type;
+- card name;
+- set or expansion;
+- collector number;
+- language;
+- selected disambiguation attributes.
+
+`DraftProductContext` is not authoritative.
+
+It may contain incomplete, uncertain or incorrect values.
+
+The user may review, correct or reject it before a final `ProductContext` is created.
+
+The key distinction is:
+
+```text
+DraftProductContext identifies.
+ProductContext describes.
+```
+
 ### Product Context
+`ProductContext` represents the user-reviewed and normalized product information.
 
+It is created after the user has confirmed or corrected the `DraftProductContext`.
+
+Unlike `DraftProductContext`, which exists to identify the product, `ProductContext` exists to describe the product with enough detail to support downstream workflows such as price estimation and listing generation.
 Product Context is the central data structure of the system.
-
-It represents the product after acquisition and normalization.
 
 It should contain:
 
@@ -302,8 +337,6 @@ Example:
   "language": "English",
   "condition": "Near Mint",
   "source": "image_analysis",
-  "confidence": 0.92,
-  "validatedByUser": false
 }
 ```
 
