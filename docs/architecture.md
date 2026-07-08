@@ -234,12 +234,15 @@ AnalysisSession
 ├── TextExtractionResult (0..1)
 │
 ├── DraftProductContext (0..1)
+│
 └── ProductContext (0..1)
         │
         ├── PriceSuggestion (0..1)
         │
         └── ListingDraft (0..N)
-
+                │
+                └── MarketplaceListing (0..1)
+```
 
 
 ### Notes
@@ -365,9 +368,14 @@ Future versions may add grading-related fields, such as:
 
 ### Listing Draft
 
-A Listing Draft represents the content generated for marketplace publication.
+`ListingDraft` represents a marketplace-specific listing proposal generated from a validated `ProductContext`, an optional `PriceSuggestion`, and user decisions.
 
-It should be derived from a validated or partially validated Product Context.
+Unlike `ProductContext`, which describes the product itself, `ListingDraft` represents how the product will appear on a specific marketplace.
+
+A single `ProductContext` may generate multiple `ListingDraft` instances for different marketplaces.
+
+The user remains responsible for reviewing and completing subjective listing information before confirming the final listing.
+
 
 It may contain:
 
@@ -384,7 +392,11 @@ It may contain:
 
 ### Price Suggestion
 
-A Price Suggestion represents a proposed value or selling range.
+`PriceSuggestion` represents a market-based price recommendation generated from a validated `ProductContext` and available market evidence.
+
+It supports user decision-making but never determines the final listing price.
+
+A price suggestion may be unavailable if no reliable market evidence exists.
 
 It may contain:
 
@@ -397,6 +409,14 @@ It may contain:
 * notes.
 
 For the MVP, the pricing model may be simple and evolve later.
+
+---
+
+### MarketplaceListing
+
+`MarketplaceListing` represents the final marketplace-specific listing after user review and confirmation.
+
+It is the finalized version of a `ListingDraft` and is ready to be exported or published.
 
 ---
 

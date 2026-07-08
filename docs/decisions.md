@@ -340,6 +340,15 @@ Card condition is always a user-owned attribute.
 
 The application may assist the user during the listing workflow, but it must not automatically determine or assign the condition of a collectible card.
 
+### Ownership of Listing Data
+
+`ProductContext` owns product information.
+
+`ListingDraft` owns the marketplace-specific representation of that product.
+
+Changes made to a `ListingDraft` must not modify the underlying `ProductContext`.
+
+
 ### AI Collaboration Model
 
 ...
