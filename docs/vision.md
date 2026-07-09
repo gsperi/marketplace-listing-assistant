@@ -2,7 +2,7 @@
 
 ## Project Status
 
-**Current Phase:** Project Definition
+**Current Phase:** Architecture Definition and Domain Modeling
 
 **Project Maturity:** Pre-MVP
 
@@ -44,7 +44,7 @@ Marketplace Listing Assistant supports users throughout the listing creation wor
 
 Starting from product images or manually entered information, the system should be able to:
 
-* identify or classify the product;
+* identify the product and build a structured `ProductContext`;
 * enrich the available information;
 * suggest a competitive price range;
 * generate optimized titles and descriptions;
@@ -98,11 +98,13 @@ These capabilities may be evaluated in future versions only if they support the 
 The first version should be capable of:
 
 * uploading product images;
+* reviewing and validating detected product information;
 * accepting manual product information;
 * generating optimized titles;
 * generating listing descriptions;
 * suggesting relevant keywords;
 * evaluating listing quality through a scoring system;
+* reviewing generated marketplace listings before export;
 * exporting marketplace-ready content.
 
 ---
@@ -112,8 +114,8 @@ The first version should be capable of:
 Future versions may introduce:
 
 * marketplace API integrations;
-* AI-based product recognition;
 * OCR capabilities;
+* AI-assisted product recognition;
 * historical price analysis;
 * multi-user support;
 * listing performance analytics;
@@ -130,6 +132,7 @@ The project will be considered successful if it can demonstrate one or more of t
 * reduce listing creation time by at least 50%;
 * improve listing completeness;
 * generate titles consistently judged better than manually written ones;
+* reduce manual editing required after automatic generation;
 * increase listing visibility (to be validated);
 * improve conversion rates (to be validated).
 

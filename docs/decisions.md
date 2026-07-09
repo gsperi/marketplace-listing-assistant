@@ -211,7 +211,7 @@ The Core Engine should always produce the highest level of information available
 * listing title;
 * description;
 * keywords;
-* quality score;
+* quality score (future);
 * suggested price range;
 * warnings;
 * alternative suggestions;
@@ -243,7 +243,7 @@ This approach helps preventing feature creep while preserving valuable ideas for
 
 ### Backend Technology
 
-The backend will initially be built using Python and FastAPI.
+Current implementation target: the backend will initially be built using Python and FastAPI.
 
 Reasoning:
 
@@ -328,6 +328,8 @@ Future input sources may create the same context from text, URLs, barcodes, or e
 
 ### Product Context
 
+The following decisions apply to the ProductContext lifecycle and ownership.
+
 ### Ownership of Product Attributes
 
 The system distinguishes between attributes that can be objectively identified and attributes that require user judgment.
@@ -355,7 +357,9 @@ Changes made to a `ListingDraft` must not modify the underlying `ProductContext`
 
 ### Recognition Failure Strategy
 
-...
+Recognition failures never block user progress.
+
+The user can always manually identify or correct the product.
 
 ### Media Asset Cardinality
 

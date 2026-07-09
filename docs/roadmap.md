@@ -2,15 +2,16 @@
 
 ## Current Phase
 
-### Software Architecture
+Architecture Definition and Domain Modeling
 
-**Status:** In Progress
+Status: Completed
 
-### Current Objective
+Next Phase:
+Development Environment
+
+### Completed Objectives
 
 Define the high-level software architecture before implementing the first production components.
-
-Current focus:
 
 * define the first user workflow;
 * identify the core system responsibilities;
@@ -40,9 +41,38 @@ Expected deliverables:
 
 ---
 
+### Core Infrastructure
+
+**Priority:** High
+
+Goal:
+
+Build the initial application skeleton.
+
+Expected deliverables:
+
+* FastAPI bootstrap;
+* React bootstrap;
+* Docker integration;
+* PostgreSQL connection;
+* health endpoint;
+* first API endpoint.
+
+---
+
 ### First Vertical Slice
 
 **Priority:** High
+
+DraftProductContext generation
+
+↓
+
+User validation
+
+↓
+
+ProductContext generation
 
 Goal:
 
@@ -52,10 +82,9 @@ Expected deliverables:
 
 * image upload;
 * mocked product recognition;
-* Product Context generation;
+* DraftProductContext generation;
 * manual review;
 * basic listing generation;
-* listing score;
 * export.
 
 ---
@@ -70,8 +99,9 @@ Replace mocked services with real implementations.
 
 Possible deliverables:
 
-* AI-based recognition;
-* pricing engine;
+* AI-assisted product recognition;
+* PriceSuggestion engine;
+* market price estimation;
 * keyword generation;
 * improved listing quality.
 

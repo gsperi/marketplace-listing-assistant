@@ -31,13 +31,11 @@ For the MVP, the primary input source is a product image.
 ```text
 Acquire Product Image
         ↓
-Analyze Product Image
+ Analyze Product
         ↓
-Build Normalized Product Context
+     Review 
         ↓
-User Review / Correction
-        ↓
-Choose Objective
+Validated Product Context
         ↓
 Estimate Value and/or Generate Listing
         ↓
@@ -70,6 +68,7 @@ Future input sources may include:
 * mobile camera input.
 
 These sources are intentionally excluded from the initial MVP.
+
 
 ---
 ### 2. Analyze Product Image
@@ -105,11 +104,11 @@ The MVP intentionally allows users to manually confirm or provide these attribut
 Future versions may introduce computer vision techniques to recognize surface finishes when technically reliable.
 ---
 
-### 3. Build Normalized Product Context
+### 3. Build Draft Product Context
 
-After image analysis, the system builds a normalized product context.
+After image analysis, the system builds a draft product context.
 
-The normalized product context represents the product in a source-independent format.
+The system builds a `DraftProductContext`, a structured proposal that will later become a source-independent ProductContext after user validation.
 
 From this point onward, the system should not depend on how the product was originally provided.
 
@@ -220,60 +219,6 @@ Direct marketplace publishing is outside the MVP scope.
 
 ---
 
-## Initial Domain Object Graph
-
-The current MVP workflow starts from a single uploaded media asset.
-
-For the MVP, the relationship between `AnalysisSession` and `MediaAsset` is intentionally restricted to one media asset per session.
-
-```text
-AnalysisSession
-│
-├── MediaAsset (1)
-│
-├── TextExtractionResult (0..1)
-│
-├── DraftProductContext (0..1)
-│
-└── ProductContext (0..1)
-        │
-        ├── PriceSuggestion (0..1)
-        │
-        └── ListingDraft (0..N)
-                │
-                └── MarketplaceListing (0..1)
-```
-
-
-### Notes
-* `AnalysisSession` represents the user-started analysis workflow.
-* `MediaAsset` represents the uploaded file used as input.
-* `TextExtractionResult` represents the raw or semi-structured text extracted from the media asset.
-* `DraftProductContext` represents the system-generated structured proposal derived from the extracted text.
-* `ProductContext` represents the user-reviewed and normalized product information.
-* `PriceSuggestion` is generated from a ProductContext.
-* `ListingDraft` is generated from a ProductContext.
-
-### MVP Constraint
-
-```text
-1 AnalysisSession = 1 MediaAsset = 1 product candidate
-```
-
-Multiple media assets per session are intentionally excluded from the MVP.
-
-Supporting multiple assets would require the system to determine whether the uploaded files represent:
-
-* the same product;
-* different products;
-* front and back images;
-* additional details;
-* accidental uploads.
-
-Future support for multiple media assets may require an explicit concept such as `MediaGroup` or `ProductEvidence`.
-
-
-
 ## Main Architectural Concepts
 
 ### DraftProductContext
@@ -338,7 +283,6 @@ Example:
   "cardNumber": "122",
   "rarity": "SPR",
   "language": "English",
-  "condition": "Near Mint",
   "source": "image_analysis",
 }
 ```
@@ -356,7 +300,7 @@ For the MVP, `ProductContext` should contain the minimum information required to
 - finish;
 - condition.
 
-`condition` is manually provided or confirmed by the user.
+`condition` is manually provided by the user.
 
 Future versions may add grading-related fields, such as:
 
@@ -366,9 +310,32 @@ Future versions may add grading-related fields, such as:
 
 ---
 
+### Price Suggestion
+
+`PriceSuggestion` represents a market-based price recommendation generated from a validated `ProductContext` and available market evidence.
+
+It supports user decision-making but never determines the final listing price.
+
+A price suggestion may be unavailable if no reliable market evidence exists therefore a ProductContext may exist without a PriceSuggestion.
+
+It may contain:
+
+* minimum price;
+* suggested price;
+* maximum price;
+* currency;
+* confidence;
+* source references;
+* notes.
+
+For the MVP, the pricing model may be simple and evolve later.
+
+---
+
 ### Listing Draft
 
-`ListingDraft` represents a marketplace-specific listing proposal generated from a validated `ProductContext`, an optional `PriceSuggestion`, and user decisions.
+`ListingDraft` represents a marketplace-specific listing draft that has not been published yet. 
+It is generated from a validated `ProductContext`, an optional `PriceSuggestion`, and user decisions.
 
 Unlike `ProductContext`, which describes the product itself, `ListingDraft` represents how the product will appear on a specific marketplace.
 
@@ -390,35 +357,14 @@ It may contain:
 
 ---
 
-### Price Suggestion
-
-`PriceSuggestion` represents a market-based price recommendation generated from a validated `ProductContext` and available market evidence.
-
-It supports user decision-making but never determines the final listing price.
-
-A price suggestion may be unavailable if no reliable market evidence exists.
-
-It may contain:
-
-* minimum price;
-* suggested price;
-* maximum price;
-* currency;
-* confidence;
-* source references;
-* notes.
-
-For the MVP, the pricing model may be simple and evolve later.
-
----
-
 ### MarketplaceListing
 
-`MarketplaceListing` represents the final marketplace-specific listing after user review and confirmation.
-
+`MarketplaceListing` represents the final marketplace-specific listing and it is created only after explicit user review and confirmation.
 It is the finalized version of a `ListingDraft` and is ready to be exported or published.
 
 ---
+
+## Future Architectural Concepts
 
 ### Listing Score
 
@@ -475,12 +421,10 @@ Business logic should live in the application/core layer.
 ### Core Engine
 
 Responsible for:
-
-* managing Product Context;
-* coordinating listing generation;
-* coordinating price estimation;
-* calculating listing score;
-* applying marketplace-independent rules.
+* coordinates the analysis workflow
+* coordinates ProductContext lifecycle
+* coordinates listing generation
+* coordinates price estimation
 
 The Core Engine should always produce the highest useful level of information available.
 
@@ -631,6 +575,58 @@ Browser extension
 
 ---
 
+## Initial Domain Object Graph
+
+The current MVP workflow starts from a single uploaded media asset.
+
+For the MVP, the relationship between `AnalysisSession` and `MediaAsset` is intentionally restricted to one media asset per session.
+
+```text
+AnalysisSession
+│
+├── MediaAsset (1)
+│
+├── TextExtractionResult (0..1)
+│
+├── DraftProductContext (0..1)
+│
+└── ProductContext (0..1)
+        │
+        ├── PriceSuggestion (0..1)
+        │
+        └── ListingDraft (0..N)
+                │
+                └── MarketplaceListing (0..1)
+```
+
+
+### Notes
+* `AnalysisSession` represents the user-started analysis workflow.
+* `MediaAsset` represents the uploaded file used as input.
+* `TextExtractionResult` represents the raw or semi-structured text extracted from the media asset.
+* `DraftProductContext` represents the system-generated structured proposal derived from the extracted text.
+* `ProductContext` represents the user-reviewed and normalized product information.
+* `PriceSuggestion` is generated from a ProductContext.
+* `ListingDraft` is generated from a ProductContext.
+
+### MVP Constraint
+
+```text
+1 AnalysisSession = 1 MediaAsset = 1 product candidate
+```
+
+Multiple media assets per session are intentionally excluded from the MVP.
+
+Supporting multiple assets would require the system to determine whether the uploaded files represent:
+
+* the same product;
+* different products;
+* front and back images;
+* additional details;
+* accidental uploads.
+
+Future support for multiple media assets may require an explicit concept such as `MediaGroup` or `ProductEvidence`.
+
 ## First Vertical Slice
 
 The first vertical slice should prove the core workflow with the smallest useful implementation.
@@ -640,15 +636,17 @@ Target flow:
 ```text
 Upload image
         ↓
-Return mocked or simplified product context
+Return DraftProductContext
         ↓
-Allow user confirmation/correction
+User confirmation/correction
         ↓
-Generate basic listing draft
+ProductContext
         ↓
-Show listing score
+ListingDraft
         ↓
-Export content
+User review/confirmation
+        ↓
+MarketplaceListing
 ```
 
 This slice should validate the system shape before investing in complex recognition, pricing or marketplace integrations.
@@ -657,12 +655,12 @@ This slice should validate the system shape before investing in complex recognit
 
 ## Open Questions
 
-* What exact fields are required for the first Product Context model?
-* Which product category should be used for the first vertical slice?
 * Should the first recognition service be mocked, AI-based, or manually assisted?
 * Which marketplace template should be implemented first?
 * Which scoring rules are useful enough for the MVP?
 * What should be stored permanently in the first version?
 
 These questions should be resolved before or during the first vertical slice.
+
+
 
